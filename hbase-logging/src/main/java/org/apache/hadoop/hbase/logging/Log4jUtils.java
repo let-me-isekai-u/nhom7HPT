@@ -17,6 +17,8 @@
  */
 package org.apache.hadoop.hbase.logging;
 
+import org.apache.hadoop.hbase.logging.DistributedLogger;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
