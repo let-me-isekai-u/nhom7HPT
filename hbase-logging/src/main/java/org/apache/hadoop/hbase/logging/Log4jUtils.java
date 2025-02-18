@@ -76,10 +76,13 @@ public final class Log4jUtils {
     invoke(method, loggerName, levelName);
   }
 
-  public static void setLogLevel(String loggerName, String levelName) {
+public static void setLogLevel(String loggerName, String levelName) {
     Method method = getMethod("setLogLevel", String.class, String.class);
     invoke(method, loggerName, levelName);
-  }
+    
+    // Log sự kiện này bằng DistributedLogger
+    logDistributed("INFO", "Changed log level of " + loggerName + " to " + levelName);
+}
 
   public static void setRootLevel(String levelName) {
     Method method = getMethod("setRootLevel", String.class);
@@ -134,4 +137,8 @@ public final class Log4jUtils {
   public static void enableDebug(Class<?> clazz) {
     setLogLevel(clazz.getName(), "DEBUG");
   }
+}
+
+public static void logDistributed(String level, String message) {
+    DistributedLogger.log(level, message);
 }
